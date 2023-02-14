@@ -69,14 +69,15 @@ def handle(conn, addr):
                 inicio.append(message)
                 print("si")
 
-                if len(inicio) == 4:
-                    contador = 0
+                if len(inicio) == 1:
+                    contador = 10
+                    broadcastMensage("cleanL".encode(FORMAT))
                     while True:
                         broadcastMensage(("Se inicia el juego en: " + str(contador)).encode(FORMAT))
                         time.sleep(1)
-                        contador = contador + 1
-                        broadcastMensage(("cleanL").encode(FORMAT))
-                        if contador == 30:
+                        contador = contador - 1
+                        broadcastMensage("cleanL".encode(FORMAT))
+                        if contador == 0:
                             break
                     listanum = "lista"
                     for x in range(25): #Agregar num del juego en el array

@@ -3,7 +3,7 @@ import threading
 from tkinter import *
 
 PORT = 5001
-SERVER = "10.20.133.8"
+SERVER = "192.168.1.133"
 ADDRESS = (SERVER, PORT)
 FORMAT = "utf-8"
 
@@ -82,9 +82,8 @@ class chat:
 
         self.name = name
 
-        #mostrar pantalla de chat
+        # mostrar pantalla de chat
         self.Window.deiconify()
-
 
         self.Window.title("Chat")
         self.Window.configure(width=470,
@@ -187,9 +186,12 @@ class chat:
                     self.mensajes.config(state=DISABLED)
                     self.mensajes.see(END)
                 elif mensaje == 'cleanL':
-                    print("hola")
-                    #limpiar el aja
-                    print("sientro")
+                    # limpiar la caja de texto
+                    self.mensajes.config(state=NORMAL)
+                    self.mensajes.config(state=NORMAL)
+                    self.mensajes.delete('1.0', END)
+                    self.mensajes.config(state=DISABLED)
+                    self.mensajes.see(END)
                 else:
                     if mensaje.find(":") == -1:
                         print(" ")
