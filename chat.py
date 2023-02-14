@@ -60,26 +60,31 @@ def handle(conn, addr):
         message = conn.recv(1024)
         print(message.decode(FORMAT))
 
-        if message.decode(FORMAT) == "ya":
-            inicio.append(message)
-            print("si")
+        if (message.decode(FORMAT)).find("100") == 0:
+            x = message.decode(FORMAT).split(" ")
 
-            if len(inicio) == 4:
-                contador = 0
-                while True:
-                    broadcastMensage(("Se inicia el juego en: " + str(contador)).encode(FORMAT))
-                    time.sleep(1)
-                    contador = contador + 1
-                    broadcastMensage(("cleanL").encode(FORMAT))
-                    if contador == 30:
-                        break
-                listanum = "lista"
-                for x in range(25): #Agregar num del juego en el array
-                    num = random.randint(11, 19)
-                    numeros.append(num)
-                    listanum = listanum + ", " + str(num)
-                print(numeros)
-                broadcastMensage(("Se inicia el juego: \n" + listanum).encode(FORMAT))
+            broadcastMensage(("HA GANADO " + str(x[1])).encode(FORMAT))
+        else:
+            if message.decode(FORMAT) == "ya":
+                inicio.append(message)
+                print("si")
+
+                if len(inicio) == 4:
+                    contador = 0
+                    while True:
+                        broadcastMensage(("Se inicia el juego en: " + str(contador)).encode(FORMAT))
+                        time.sleep(1)
+                        contador = contador + 1
+                        broadcastMensage(("cleanL").encode(FORMAT))
+                        if contador == 30:
+                            break
+                    listanum = "lista"
+                    for x in range(25): #Agregar num del juego en el array
+                        num = random.randint(11, 19)
+                        numeros.append(num)
+                        listanum = listanum + ", " + str(num)
+                    print(numeros)
+                    broadcastMensage(("Se inicia el juego: \n" + listanum).encode(FORMAT))
 
         # Se envían mensajes
         if len(inicio) == len(clientes):
